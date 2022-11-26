@@ -3,4 +3,14 @@
     <string name="title_activity_mechanic_maps">MechanicMapsActivity</string>
     <string name="title_activity_customer_map">CustomerMapActivity</string>
     <string name="title_activity_customer_maps">CustomerMapsActivity</string>
+    <string name="customer_s_profile">Customer\'s Profile</string>
+    <string name="name">Name</string>
+    <string name="phone_no">Phone No.</string>
+    <string name="vehicle_type">Vehicle Type.</string>
+    <string name="save">Save</string>
+    <string name="back">Back</string>
+    <string name="Mech_Back">Back</string>
+    <string name="Mech_save">Save</string>
+    <string name="Mech_phone">Phone</string>
+    <string name="Mech_name">Name</string>
 </resources>

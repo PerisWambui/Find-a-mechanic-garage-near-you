@@ -17,7 +17,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class CustomerRegisterActivity extends AppCompatActivity {
@@ -42,17 +46,8 @@ public class CustomerRegisterActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-        /*firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if(user!=null){
-                    Intent intent = new Intent(CustomerRegisterActivity.this, CustomerLoginActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        };*/
+
+        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("Customers");
 
         msignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,8 +71,24 @@ public class CustomerRegisterActivity extends AppCompatActivity {
                                 Toast.makeText(CustomerRegisterActivity.this, "Sign Up Error", Toast.LENGTH_SHORT).show();
 
                             } else {
+                                Map<String, Object> map=new HashMap<>();
+                                map.put("email",user);
+                                if(mAuth.getCurrentUser()!=null) {
+                                    map.put("userId", mAuth.getCurrentUser().getUid());
+                                }
 
+                                databaseReference.child(mAuth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener() {
+
+                                    @Override
+                                    public void onComplete(@NonNull Task task) {
+                                        if(task.isSuccessful()){
+
+                                        }
+                                    }
+                                });
                                 mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+
+
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if(task.isSuccessful()){
@@ -91,7 +102,6 @@ public class CustomerRegisterActivity extends AppCompatActivity {
                                     }
                                 });
 
-                                FirebaseAuth.getInstance().signOut();
 
                             }
                         }

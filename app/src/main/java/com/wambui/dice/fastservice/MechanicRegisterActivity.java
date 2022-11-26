@@ -16,7 +16,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class MechanicRegisterActivity extends AppCompatActivity {
@@ -25,6 +29,7 @@ public class MechanicRegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private Button mLogin, msignup;
+    DatabaseReference reference;
 
 
     @Override
@@ -40,26 +45,19 @@ public class MechanicRegisterActivity extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-       /* firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if(user!=null){
-                    Intent intent = new Intent(MechanicRegisterActivity.this, MechanicLoginActivity.class);
-                    startActivity(intent);
 
-                    finish();
-
-                }
-
-            }
-        };*/
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Mechanics");
 
         msignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String user = mEmail.getText().toString().trim();
                 String pass = mPassword.getText().toString().trim();
+
+                //map values)
+
+
+
                 if (user.isEmpty()) {
                     mEmail.setError("Email cannot be empty");
                 }
@@ -73,7 +71,19 @@ public class MechanicRegisterActivity extends AppCompatActivity {
                             if (!task.isSuccessful()) {
                                 Toast.makeText(MechanicRegisterActivity.this, "Sign Up Error", Toast.LENGTH_SHORT).show();
                             } else {
+                                Map<String, Object> map=new HashMap<>();
+                                map.put("email",user);
+                                if(mAuth.getCurrentUser()!=null) {
+                                    map.put("userId", mAuth.getCurrentUser().getUid());
+                                }
+                                databaseReference.child(mAuth.getCurrentUser().getUid()).setValue(map).addOnCompleteListener(new OnCompleteListener() {
+                                    @Override
+                                    public void onComplete(@NonNull Task task) {
+                                        if(task.isSuccessful()){
 
+                                        }
+                                    }
+                                });
                                 mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -87,8 +97,6 @@ public class MechanicRegisterActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
-
-                                FirebaseAuth.getInstance().signOut();
                             }
                         }
                     });
@@ -106,6 +114,15 @@ public class MechanicRegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public class User{
+        public String email;
+        public String password;
+
+        public User(){
+
+        }
     }
 
     @Override

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MechanicMapsActivity">
+    tools:context=".MechanicMapActivity2">
 
     <fragment
         android:id="@+id/map"
@@ -112,8 +112,8 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pickup Customer"
-            android:id="@+id/rideStatus"
+            android:text="Connect with your customer..."
+            android:id="@+id/workingStatus"
             android:background="#80ced6"/>
     </LinearLayout>
 </FrameLayout>

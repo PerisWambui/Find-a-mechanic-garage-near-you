@@ -14,18 +14,18 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ResetPasswordActivity extends AppCompatActivity {
+public class PasswordActivity2 extends AppCompatActivity {
 
     private EditText edtEmail;
     private Button btnResetPassword;
     private Button btnBack;
     private FirebaseAuth mAuth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reset_password);
+        setContentView(R.layout.activity_password2);
+
 
         edtEmail = (EditText) findViewById(R.id.reset_email);
         btnResetPassword = (Button) findViewById(R.id.reset_password);
@@ -49,9 +49,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(ResetPasswordActivity.this, "Check email to reset your password!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PasswordActivity2.this, "Check email to reset your password!", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(ResetPasswordActivity.this, "Fail to send reset password email!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PasswordActivity2.this, "Fail to send reset password email!", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -67,4 +67,5 @@ public class ResetPasswordActivity extends AppCompatActivity {
     }
 
 
-    }
+}
+

@@ -42,7 +42,7 @@ public class CustomerLoginActivity extends AppCompatActivity {
         mForgetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CustomerLoginActivity.this , ResetPasswordActivity.class);
+                Intent intent = new Intent(CustomerLoginActivity.this , PasswordActivity2.class);
                 startActivity(intent);
                 finish();
 
@@ -57,7 +57,7 @@ public class CustomerLoginActivity extends AppCompatActivity {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if(user!=null && mAuth.getCurrentUser().isEmailVerified()){
 
-                    Intent intent = new Intent(CustomerLoginActivity.this, CustomerMapActivity.class);
+                    Intent intent = new Intent(CustomerLoginActivity.this, CustomerHomeActivity.class);
                     Toast.makeText(CustomerLoginActivity.this, "Welcome to Fast Garage", Toast.LENGTH_SHORT).show();
                     startActivity(intent);
                     finish();
