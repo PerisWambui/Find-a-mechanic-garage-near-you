@@ -22,8 +22,8 @@ RaveUiManager ravePayManager;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
-        ravePayManager=new RaveUiManager(PaymentActivity.this).setPublicKey("FLWPUBK_TEST-3513bd0dbb93f199f6ec926756adfbc0-X")
-                .setEncryptionKey("FLWSECK_TESTf70b1a3982af")
+        ravePayManager=new RaveUiManager(PaymentActivity.this).setPublicKey("")
+                .setEncryptionKey("")
                 .onStagingEnv(true);
 
         Button pay = findViewById(R.id.pay);
