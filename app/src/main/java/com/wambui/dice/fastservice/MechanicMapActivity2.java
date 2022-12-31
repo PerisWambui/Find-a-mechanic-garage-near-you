@@ -99,7 +99,7 @@ public class MechanicMapActivity2 extends AppCompatActivity implements OnMapRead
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mechanic_map2);
 
-        Places.initialize(getApplicationContext(), "AIzaSyCufJvjKE7N73zjoi4t_DG9UAUc2gPMBCg", Locale.US);
+        Places.initialize(getApplicationContext(), "APIKEY", Locale.US);
 
         mFusedLoactionClient = LocationServices.getFusedLocationProviderClient(this);
         //Show poly line
