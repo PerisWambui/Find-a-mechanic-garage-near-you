@@ -185,7 +185,7 @@ public class CustomerMapActivity extends AppCompatActivity implements OnMapReady
             }
         });
 
-        Places.initialize(getApplicationContext(), "AIzaSyCufJvjKE7N73zjoi4t_DG9UAUc2gPMBCg", Locale.US);
+        Places.initialize(getApplicationContext(), "APIKEY", Locale.US);
 
         // Initialize the AutocompleteSupportFragment.
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
